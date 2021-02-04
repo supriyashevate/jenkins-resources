@@ -11,27 +11,27 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    ./jenkins/pipeline/jenkins/build/mvn.sh mvn -B -DskipTests clean package
-                    ./jenkins/pipeline/jenkins/build/build.sh
+                    ./jenkins/build/mvn.sh mvn -B -DskipTests clean package
+                    ./jenkins/build/build.sh
 
                 '''
             }
 
             post {
                 success {
-                   archiveArtifacts artifacts: 'jenkins/pipeline/java-app/target/*.jar', fingerprint: true
+                   archiveArtifacts artifacts: 'java-app/target/*.jar', fingerprint: true
                 }
             }
         }
 
         stage('Test') {
             steps {
-                sh './jenkins/pipeline/jenkins/test/mvn.sh mvn test'
+                sh './jenkins/test/mvn.sh mvn test'
             }
 
             post {
                 always {
-                    junit 'jenkins/pipeline/java-app/*.xml'
+                    junit 'java-app/*.xml'
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh './jenkins/pipeline/jenkins/deploy/deploy.sh'
+                sh './jenkins/deploy/deploy.sh'
             }
         }
     }
