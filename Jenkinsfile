@@ -38,7 +38,7 @@ pipeline {
 
         stage('Push') {
             steps {
-                sh './jenkins/pipeline/jenkins/push/push.sh'
+                sh './jenkins/push/push.sh'
             }
         }
 
