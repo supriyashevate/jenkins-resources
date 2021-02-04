@@ -29,11 +29,7 @@ pipeline {
                 sh './jenkins/test/mvn.sh mvn test'
             }
 
-            post {
-                always {
-                    junit 'java-app/*.xml'
-                }
-            }
+          
         }
 
         stage('Push') {
