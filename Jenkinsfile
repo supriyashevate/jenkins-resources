@@ -8,14 +8,6 @@ pipeline {
 
     stages {
         
-        stage('Cleanup Workspace') {
-            steps {
-                sh """
-                echo "Cleaned Up Workspace For Project"
-                """
-            }
-        }
-
         stage('Code Checkout') {
             steps {
               checkout([$class: 'GitSCM', 
